@@ -1,0 +1,14 @@
+.Sidebar {
+  max-width: 20%;
+  flex-basis: 20%;
+  margin-right: 20px;
+}
+
+.SidebarListItem{
+  padding: 8px;
+  border: 1px solid #000000;
+  text-transform: uppercase;
+   &:not(:last-child) {
+     margin-bottom: 15px;
+   }
+}

@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  color: #ffffff;
+  background-color: #000000;
+  border: 1px solid #000000;
+  padding: 5px 8px;
+  font-size: 18px;
+}
+
+.Container {
+  display: flex;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 30px;
+}
