@@ -1,10 +1,9 @@
 import React from 'react';
 
-const ImageItem = (src) => {
-
+const ImageItem = ({src}) => {
     return (
         <div className={'ImageItem'}>
-            <img src={src.src} alt=""/>
+            <img src={src} alt=""/>
         </div>
     );
 };

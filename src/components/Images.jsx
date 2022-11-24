@@ -1,18 +1,29 @@
-import {useContext, useEffect} from 'react';
+import {useContext, useEffect, useRef} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {getImages} from "../app/slices/images.slice";
 import ImageItem from "./ImageItem";
 import {Context} from "../context/AppContext";
+import {useParams} from "react-router-dom";
+import Error from "./UI/Error";
+import Loader from "./UI/Loader";
+import Button from "./UI/Button";
 
 const Images = () => {
-    const {images, isLoading, error} = useSelector(state => state.main.images)
+    const {images, error} = useSelector(state => state.main.images)
     const dispatch = useDispatch()
-
-    const {category, page, limit, setPage} = useContext(Context)
+    const {id} = useParams()
+    const {page, setPage, limit} = useContext(Context)
+    const divRef = useRef(null);
 
     useEffect(()=>{
-        dispatch(getImages({limit, category, page}))
-    }, [dispatch, limit, category, page])
+        dispatch(getImages({limit, category: id, page}))
+    }, [dispatch, limit, id, page])
+
+    useEffect(() => {
+        setTimeout(()=>{
+            divRef.current.scrollIntoView({behavior: "smooth"});
+        }, 500)
+    }, [page])
 
     const loadMore = ()=>{
         setPage(prev=>prev + 1)
@@ -22,16 +33,19 @@ const Images = () => {
         <div className={'ImagesWrapper'}>
             <h1>Cats</h1>
             <div className={'Images'}>
-                {error ? <p>{error}</p> : null}
+                {error ? <Error error={error}/> : null}
                 {
-                    !isLoading ? images.map((image)=>{
-                        return <ImageItem src={image.url} key={image.id + Math.random()}/>
-                    }) : <h2>Loading...</h2>
+                    images.length ? images.map((image, index)=>{
+                        return <ImageItem src={image.url} key={image.id + index}/>
+                    }) : <Loader/>
                 }
+                <div ref={divRef}></div>
             </div>
             {
                 images.length ? <div className={'LoadMore'}>
-                    <button className={'LoadMoreButton'} onClick={loadMore}>Load more</button>
+                    <Button className={'LoadMoreButton'} onClick={loadMore}>
+                        Load more
+                    </Button>
                 </div> : null
             }
 

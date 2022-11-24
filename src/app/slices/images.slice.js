@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
-export const getImages = createAsyncThunk('images/getImages', async ({limit, category, page}, {rejectWithValue})=>{
-   try {
+export const getImages = createAsyncThunk('images/getImages', async ({limit, category, page=1}, {rejectWithValue})=>{
+    try {
        return await fetch(`https://api.thecatapi.com/v1/images/search?limit=${limit}&page=${page}&category_ids=${category}`)
            .then(res=>res.json())
            .then(data=>data)

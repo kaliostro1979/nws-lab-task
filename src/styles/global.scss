@@ -8,6 +8,15 @@ ul {
   list-style: none;
 }
 
+a {
+  text-decoration: none;
+  color: #000000;
+
+  &.active {
+    color: red;
+  }
+}
+
 button {
   color: #ffffff;
   background-color: #000000;
@@ -21,4 +30,20 @@ button {
   max-width: 1440px;
   margin: 0 auto;
   padding: 30px;
+}
+
+.ContentWrapper {
+  flex-basis: 80%;
+  max-width: 80%;
+}
+
+@media (max-width: 991px) {
+  .Container {
+    flex-wrap: wrap;
+  }
+
+  .ContentWrapper {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
 }
