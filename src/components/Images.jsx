@@ -9,7 +9,7 @@ import Loader from "./UI/Loader";
 import Button from "./UI/Button";
 
 const Images = () => {
-    const {images, error} = useSelector(state => state.main.images)
+    const {images, error, isLoading} = useSelector(state => state.main.images)
     const dispatch = useDispatch()
     const {id} = useParams()
     const {page, setPage, limit} = useContext(Context)
@@ -44,7 +44,7 @@ const Images = () => {
             {
                 images.length ? <div className={'LoadMore'}>
                     <Button className={'LoadMoreButton'} onClick={loadMore}>
-                        Load more
+                        {!isLoading ? 'Load more' : 'Loading...'}
                     </Button>
                 </div> : null
             }
